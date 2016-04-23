@@ -37,13 +37,24 @@ SUBDIRS :=  \
 ../src/ASF/ \
 ../src/ASF/common/ \
 ../src/ASF/common/boards/ \
+../src/ASF/common/components/ \
+../src/ASF/common/components/display/ \
+../src/ASF/common/components/display/st7565r/ \
 ../src/ASF/common/services/ \
 ../src/ASF/common/services/clock/ \
 ../src/ASF/common/services/clock/xmega/ \
+../src/ASF/common/services/delay/ \
+../src/ASF/common/services/delay/xmega/ \
+../src/ASF/common/services/gfx_mono/ \
+../src/ASF/common/services/gfx_mono/docsrc/ \
+../src/ASF/common/services/gfx_mono/tools/ \
 ../src/ASF/common/services/gpio/ \
 ../src/ASF/common/services/gpio/xmega_gpio/ \
 ../src/ASF/common/services/ioport/ \
 ../src/ASF/common/services/ioport/xmega/ \
+../src/ASF/common/services/spi/ \
+../src/ASF/common/services/spi/xmega_spi/ \
+../src/ASF/common/services/spi/xmega_usart_spi/ \
 ../src/ASF/common/utils/ \
 ../src/ASF/common/utils/interrupt/ \
 ../src/ASF/common/utils/make/ \
@@ -53,6 +64,9 @@ SUBDIRS :=  \
 ../src/ASF/xmega/drivers/ \
 ../src/ASF/xmega/drivers/cpu/ \
 ../src/ASF/xmega/drivers/nvm/ \
+../src/ASF/xmega/drivers/pmic/ \
+../src/ASF/xmega/drivers/spi/ \
+../src/ASF/xmega/drivers/usart/ \
 ../src/ASF/xmega/utils/ \
 ../src/ASF/xmega/utils/assembler/ \
 ../src/ASF/xmega/utils/bit_handling/ \
@@ -62,10 +76,25 @@ SUBDIRS :=  \
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../src/jets_util.c \
+../src/solenoid.c \
+../src/music.c \
+../src/ASF/common/components/display/st7565r/st7565r.c \
 ../src/ASF/common/services/clock/xmega/sysclk.c \
+../src/ASF/common/services/gfx_mono/gfx_mono_c12832_a1z.c \
+../src/ASF/common/services/gfx_mono/gfx_mono_framebuffer.c \
+../src/ASF/common/services/gfx_mono/gfx_mono_generic.c \
+../src/ASF/common/services/gfx_mono/gfx_mono_menu.c \
+../src/ASF/common/services/gfx_mono/gfx_mono_text.c \
+../src/ASF/common/services/gfx_mono/sysfont.c \
+../src/ASF/common/services/spi/xmega_spi/spi_master.c \
+../src/ASF/common/services/spi/xmega_usart_spi/usart_spi.c \
 ../src/ASF/xmega/drivers/nvm/nvm.c \
 ../src/ASF/common/services/ioport/xmega/ioport_compat.c \
 ../src/ASF/xmega/boards/xmega_a3bu_xplained/init.c \
+../src/ASF/xmega/drivers/spi/spi.c \
+../src/ASF/xmega/drivers/usart/usart.c \
+../src/keyboard.c \
 ../src/main.c
 
 
@@ -78,39 +107,99 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+src/jets_util.o \
+src/solenoid.o \
+src/music.o \
+src/ASF/common/components/display/st7565r/st7565r.o \
 src/ASF/common/services/clock/xmega/sysclk.o \
+src/ASF/common/services/gfx_mono/gfx_mono_c12832_a1z.o \
+src/ASF/common/services/gfx_mono/gfx_mono_framebuffer.o \
+src/ASF/common/services/gfx_mono/gfx_mono_generic.o \
+src/ASF/common/services/gfx_mono/gfx_mono_menu.o \
+src/ASF/common/services/gfx_mono/gfx_mono_text.o \
+src/ASF/common/services/gfx_mono/sysfont.o \
+src/ASF/common/services/spi/xmega_spi/spi_master.o \
+src/ASF/common/services/spi/xmega_usart_spi/usart_spi.o \
 src/ASF/xmega/drivers/nvm/nvm.o \
 src/ASF/xmega/drivers/nvm/nvm_asm.o \
 src/ASF/xmega/drivers/cpu/ccp.o \
 src/ASF/common/services/ioport/xmega/ioport_compat.o \
 src/ASF/xmega/boards/xmega_a3bu_xplained/init.o \
+src/ASF/xmega/drivers/spi/spi.o \
+src/ASF/xmega/drivers/usart/usart.o \
+src/keyboard.o \
 src/main.o
 
 OBJS_AS_ARGS +=  \
+src/jets_util.o \
+src/solenoid.o \
+src/music.o \
+src/ASF/common/components/display/st7565r/st7565r.o \
 src/ASF/common/services/clock/xmega/sysclk.o \
+src/ASF/common/services/gfx_mono/gfx_mono_c12832_a1z.o \
+src/ASF/common/services/gfx_mono/gfx_mono_framebuffer.o \
+src/ASF/common/services/gfx_mono/gfx_mono_generic.o \
+src/ASF/common/services/gfx_mono/gfx_mono_menu.o \
+src/ASF/common/services/gfx_mono/gfx_mono_text.o \
+src/ASF/common/services/gfx_mono/sysfont.o \
+src/ASF/common/services/spi/xmega_spi/spi_master.o \
+src/ASF/common/services/spi/xmega_usart_spi/usart_spi.o \
 src/ASF/xmega/drivers/nvm/nvm.o \
 src/ASF/xmega/drivers/nvm/nvm_asm.o \
 src/ASF/xmega/drivers/cpu/ccp.o \
 src/ASF/common/services/ioport/xmega/ioport_compat.o \
 src/ASF/xmega/boards/xmega_a3bu_xplained/init.o \
+src/ASF/xmega/drivers/spi/spi.o \
+src/ASF/xmega/drivers/usart/usart.o \
+src/keyboard.o \
 src/main.o
 
 C_DEPS +=  \
+src/jets_util.d \
+src/solenoid.d \
+src/music.d \
+src/ASF/common/components/display/st7565r/st7565r.d \
 src/ASF/common/services/clock/xmega/sysclk.d \
+src/ASF/common/services/gfx_mono/gfx_mono_c12832_a1z.d \
+src/ASF/common/services/gfx_mono/gfx_mono_framebuffer.d \
+src/ASF/common/services/gfx_mono/gfx_mono_generic.d \
+src/ASF/common/services/gfx_mono/gfx_mono_menu.d \
+src/ASF/common/services/gfx_mono/gfx_mono_text.d \
+src/ASF/common/services/gfx_mono/sysfont.d \
+src/ASF/common/services/spi/xmega_spi/spi_master.d \
+src/ASF/common/services/spi/xmega_usart_spi/usart_spi.d \
 src/ASF/xmega/drivers/nvm/nvm.d \
 src/ASF/xmega/drivers/nvm/nvm_asm.d \
 src/ASF/xmega/drivers/cpu/ccp.d \
 src/ASF/common/services/ioport/xmega/ioport_compat.d \
 src/ASF/xmega/boards/xmega_a3bu_xplained/init.d \
+src/ASF/xmega/drivers/spi/spi.d \
+src/ASF/xmega/drivers/usart/usart.d \
+src/keyboard.d \
 src/main.d
 
 C_DEPS_AS_ARGS +=  \
+src/jets_util.d \
+src/solenoid.d \
+src/music.d \
+src/ASF/common/components/display/st7565r/st7565r.d \
 src/ASF/common/services/clock/xmega/sysclk.d \
+src/ASF/common/services/gfx_mono/gfx_mono_c12832_a1z.d \
+src/ASF/common/services/gfx_mono/gfx_mono_framebuffer.d \
+src/ASF/common/services/gfx_mono/gfx_mono_generic.d \
+src/ASF/common/services/gfx_mono/gfx_mono_menu.d \
+src/ASF/common/services/gfx_mono/gfx_mono_text.d \
+src/ASF/common/services/gfx_mono/sysfont.d \
+src/ASF/common/services/spi/xmega_spi/spi_master.d \
+src/ASF/common/services/spi/xmega_usart_spi/usart_spi.d \
 src/ASF/xmega/drivers/nvm/nvm.d \
 src/ASF/xmega/drivers/nvm/nvm_asm.d \
 src/ASF/xmega/drivers/cpu/ccp.d \
 src/ASF/common/services/ioport/xmega/ioport_compat.d \
 src/ASF/xmega/boards/xmega_a3bu_xplained/init.d \
+src/ASF/xmega/drivers/spi/spi.d \
+src/ASF/xmega/drivers/usart/usart.d \
+src/keyboard.d \
 src/main.d
 
 OUTPUT_FILE_PATH +=Final_Project.elf
@@ -138,38 +227,110 @@ LINKER_SCRIPT_DEP+=
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+src/%.o: ../src/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.9.2
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -DDEBUG -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DBOARD=XMEGA_A3BU_XPLAINED -DIOPORT_XMEGA_COMPAT -DGFX_MONO_C12832_A1Z=1  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I"../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I"../src/ASF/xmega/utils" -I"../src/config" -I"../src/ASF/common/boards" -I"../src/ASF/xmega/boards" -I"../src/ASF/xmega/boards/xmega_a3bu_xplained" -I"../src/ASF/xmega/utils/preprocessor" -I"../src/ASF/common/utils" -I"../src/ASF/common/services/ioport" -I"../src" -I"../src/ASF/common/services/gpio" -I"../src/ASF/xmega/drivers/cpu" -I"../src/ASF/xmega/drivers/nvm" -I"../src/ASF/common/services/clock" -I"../src/ASF/common/components/display/st7565r" -I"../src/ASF/common/services/gfx_mono" -I"../src/ASF/xmega/drivers/pmic" -I"../src/ASF/xmega/drivers/spi" -I"../src/ASF/common/services/delay" -I"../src/ASF/common/services/spi/xmega_spi" -I"../src/ASF/common/services/spi" -I"../src/ASF/xmega/drivers/usart"  -O1 -fdata-sections -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g3 -Wall -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -c -std=gnu99 -fno-strict-aliasing -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -mrelax -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/ASF/common/components/display/st7565r/%.o: ../src/ASF/common/components/display/st7565r/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.9.2
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -DDEBUG -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DBOARD=XMEGA_A3BU_XPLAINED -DIOPORT_XMEGA_COMPAT -DGFX_MONO_C12832_A1Z=1  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I"../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I"../src/ASF/xmega/utils" -I"../src/config" -I"../src/ASF/common/boards" -I"../src/ASF/xmega/boards" -I"../src/ASF/xmega/boards/xmega_a3bu_xplained" -I"../src/ASF/xmega/utils/preprocessor" -I"../src/ASF/common/utils" -I"../src/ASF/common/services/ioport" -I"../src" -I"../src/ASF/common/services/gpio" -I"../src/ASF/xmega/drivers/cpu" -I"../src/ASF/xmega/drivers/nvm" -I"../src/ASF/common/services/clock" -I"../src/ASF/common/components/display/st7565r" -I"../src/ASF/common/services/gfx_mono" -I"../src/ASF/xmega/drivers/pmic" -I"../src/ASF/xmega/drivers/spi" -I"../src/ASF/common/services/delay" -I"../src/ASF/common/services/spi/xmega_spi" -I"../src/ASF/common/services/spi" -I"../src/ASF/xmega/drivers/usart"  -O1 -fdata-sections -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g3 -Wall -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -c -std=gnu99 -fno-strict-aliasing -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -mrelax -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 src/ASF/common/services/clock/xmega/%.o: ../src/ASF/common/services/clock/xmega/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -DDEBUG -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DBOARD=XMEGA_A3BU_XPLAINED -DIOPORT_XMEGA_COMPAT  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I"../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I"../src/ASF/xmega/utils" -I"../src/config" -I"../src/ASF/common/boards" -I"../src/ASF/xmega/boards" -I"../src/ASF/xmega/boards/xmega_a3bu_xplained" -I"../src/ASF/xmega/utils/preprocessor" -I"../src/ASF/common/utils" -I"../src/ASF/common/services/ioport" -I"../src" -I"../src/ASF/common/services/gpio" -I"../src/ASF/xmega/drivers/cpu" -I"../src/ASF/xmega/drivers/nvm" -I"../src/ASF/common/services/clock"  -O1 -fdata-sections -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g3 -Wall -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -c -std=gnu99 -fno-strict-aliasing -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -mrelax -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -DDEBUG -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DBOARD=XMEGA_A3BU_XPLAINED -DIOPORT_XMEGA_COMPAT -DGFX_MONO_C12832_A1Z=1  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I"../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I"../src/ASF/xmega/utils" -I"../src/config" -I"../src/ASF/common/boards" -I"../src/ASF/xmega/boards" -I"../src/ASF/xmega/boards/xmega_a3bu_xplained" -I"../src/ASF/xmega/utils/preprocessor" -I"../src/ASF/common/utils" -I"../src/ASF/common/services/ioport" -I"../src" -I"../src/ASF/common/services/gpio" -I"../src/ASF/xmega/drivers/cpu" -I"../src/ASF/xmega/drivers/nvm" -I"../src/ASF/common/services/clock" -I"../src/ASF/common/components/display/st7565r" -I"../src/ASF/common/services/gfx_mono" -I"../src/ASF/xmega/drivers/pmic" -I"../src/ASF/xmega/drivers/spi" -I"../src/ASF/common/services/delay" -I"../src/ASF/common/services/spi/xmega_spi" -I"../src/ASF/common/services/spi" -I"../src/ASF/xmega/drivers/usart"  -O1 -fdata-sections -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g3 -Wall -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -c -std=gnu99 -fno-strict-aliasing -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -mrelax -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/ASF/common/services/gfx_mono/%.o: ../src/ASF/common/services/gfx_mono/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.9.2
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -DDEBUG -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DBOARD=XMEGA_A3BU_XPLAINED -DIOPORT_XMEGA_COMPAT -DGFX_MONO_C12832_A1Z=1  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I"../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I"../src/ASF/xmega/utils" -I"../src/config" -I"../src/ASF/common/boards" -I"../src/ASF/xmega/boards" -I"../src/ASF/xmega/boards/xmega_a3bu_xplained" -I"../src/ASF/xmega/utils/preprocessor" -I"../src/ASF/common/utils" -I"../src/ASF/common/services/ioport" -I"../src" -I"../src/ASF/common/services/gpio" -I"../src/ASF/xmega/drivers/cpu" -I"../src/ASF/xmega/drivers/nvm" -I"../src/ASF/common/services/clock" -I"../src/ASF/common/components/display/st7565r" -I"../src/ASF/common/services/gfx_mono" -I"../src/ASF/xmega/drivers/pmic" -I"../src/ASF/xmega/drivers/spi" -I"../src/ASF/common/services/delay" -I"../src/ASF/common/services/spi/xmega_spi" -I"../src/ASF/common/services/spi" -I"../src/ASF/xmega/drivers/usart"  -O1 -fdata-sections -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g3 -Wall -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -c -std=gnu99 -fno-strict-aliasing -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -mrelax -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/ASF/common/services/spi/xmega_spi/%.o: ../src/ASF/common/services/spi/xmega_spi/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.9.2
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -DDEBUG -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DBOARD=XMEGA_A3BU_XPLAINED -DIOPORT_XMEGA_COMPAT -DGFX_MONO_C12832_A1Z=1  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I"../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I"../src/ASF/xmega/utils" -I"../src/config" -I"../src/ASF/common/boards" -I"../src/ASF/xmega/boards" -I"../src/ASF/xmega/boards/xmega_a3bu_xplained" -I"../src/ASF/xmega/utils/preprocessor" -I"../src/ASF/common/utils" -I"../src/ASF/common/services/ioport" -I"../src" -I"../src/ASF/common/services/gpio" -I"../src/ASF/xmega/drivers/cpu" -I"../src/ASF/xmega/drivers/nvm" -I"../src/ASF/common/services/clock" -I"../src/ASF/common/components/display/st7565r" -I"../src/ASF/common/services/gfx_mono" -I"../src/ASF/xmega/drivers/pmic" -I"../src/ASF/xmega/drivers/spi" -I"../src/ASF/common/services/delay" -I"../src/ASF/common/services/spi/xmega_spi" -I"../src/ASF/common/services/spi" -I"../src/ASF/xmega/drivers/usart"  -O1 -fdata-sections -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g3 -Wall -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -c -std=gnu99 -fno-strict-aliasing -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -mrelax -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/ASF/common/services/spi/xmega_usart_spi/%.o: ../src/ASF/common/services/spi/xmega_usart_spi/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.9.2
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -DDEBUG -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DBOARD=XMEGA_A3BU_XPLAINED -DIOPORT_XMEGA_COMPAT -DGFX_MONO_C12832_A1Z=1  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I"../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I"../src/ASF/xmega/utils" -I"../src/config" -I"../src/ASF/common/boards" -I"../src/ASF/xmega/boards" -I"../src/ASF/xmega/boards/xmega_a3bu_xplained" -I"../src/ASF/xmega/utils/preprocessor" -I"../src/ASF/common/utils" -I"../src/ASF/common/services/ioport" -I"../src" -I"../src/ASF/common/services/gpio" -I"../src/ASF/xmega/drivers/cpu" -I"../src/ASF/xmega/drivers/nvm" -I"../src/ASF/common/services/clock" -I"../src/ASF/common/components/display/st7565r" -I"../src/ASF/common/services/gfx_mono" -I"../src/ASF/xmega/drivers/pmic" -I"../src/ASF/xmega/drivers/spi" -I"../src/ASF/common/services/delay" -I"../src/ASF/common/services/spi/xmega_spi" -I"../src/ASF/common/services/spi" -I"../src/ASF/xmega/drivers/usart"  -O1 -fdata-sections -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g3 -Wall -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -c -std=gnu99 -fno-strict-aliasing -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -mrelax -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 src/ASF/xmega/drivers/nvm/%.o: ../src/ASF/xmega/drivers/nvm/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -DDEBUG -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DBOARD=XMEGA_A3BU_XPLAINED -DIOPORT_XMEGA_COMPAT  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I"../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I"../src/ASF/xmega/utils" -I"../src/config" -I"../src/ASF/common/boards" -I"../src/ASF/xmega/boards" -I"../src/ASF/xmega/boards/xmega_a3bu_xplained" -I"../src/ASF/xmega/utils/preprocessor" -I"../src/ASF/common/utils" -I"../src/ASF/common/services/ioport" -I"../src" -I"../src/ASF/common/services/gpio" -I"../src/ASF/xmega/drivers/cpu" -I"../src/ASF/xmega/drivers/nvm" -I"../src/ASF/common/services/clock"  -O1 -fdata-sections -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g3 -Wall -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -c -std=gnu99 -fno-strict-aliasing -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -mrelax -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -DDEBUG -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DBOARD=XMEGA_A3BU_XPLAINED -DIOPORT_XMEGA_COMPAT -DGFX_MONO_C12832_A1Z=1  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I"../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I"../src/ASF/xmega/utils" -I"../src/config" -I"../src/ASF/common/boards" -I"../src/ASF/xmega/boards" -I"../src/ASF/xmega/boards/xmega_a3bu_xplained" -I"../src/ASF/xmega/utils/preprocessor" -I"../src/ASF/common/utils" -I"../src/ASF/common/services/ioport" -I"../src" -I"../src/ASF/common/services/gpio" -I"../src/ASF/xmega/drivers/cpu" -I"../src/ASF/xmega/drivers/nvm" -I"../src/ASF/common/services/clock" -I"../src/ASF/common/components/display/st7565r" -I"../src/ASF/common/services/gfx_mono" -I"../src/ASF/xmega/drivers/pmic" -I"../src/ASF/xmega/drivers/spi" -I"../src/ASF/common/services/delay" -I"../src/ASF/common/services/spi/xmega_spi" -I"../src/ASF/common/services/spi" -I"../src/ASF/xmega/drivers/usart"  -O1 -fdata-sections -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g3 -Wall -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -c -std=gnu99 -fno-strict-aliasing -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -mrelax -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 src/ASF/common/services/ioport/xmega/%.o: ../src/ASF/common/services/ioport/xmega/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -DDEBUG -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DBOARD=XMEGA_A3BU_XPLAINED -DIOPORT_XMEGA_COMPAT  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I"../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I"../src/ASF/xmega/utils" -I"../src/config" -I"../src/ASF/common/boards" -I"../src/ASF/xmega/boards" -I"../src/ASF/xmega/boards/xmega_a3bu_xplained" -I"../src/ASF/xmega/utils/preprocessor" -I"../src/ASF/common/utils" -I"../src/ASF/common/services/ioport" -I"../src" -I"../src/ASF/common/services/gpio" -I"../src/ASF/xmega/drivers/cpu" -I"../src/ASF/xmega/drivers/nvm" -I"../src/ASF/common/services/clock"  -O1 -fdata-sections -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g3 -Wall -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -c -std=gnu99 -fno-strict-aliasing -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -mrelax -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -DDEBUG -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DBOARD=XMEGA_A3BU_XPLAINED -DIOPORT_XMEGA_COMPAT -DGFX_MONO_C12832_A1Z=1  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I"../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I"../src/ASF/xmega/utils" -I"../src/config" -I"../src/ASF/common/boards" -I"../src/ASF/xmega/boards" -I"../src/ASF/xmega/boards/xmega_a3bu_xplained" -I"../src/ASF/xmega/utils/preprocessor" -I"../src/ASF/common/utils" -I"../src/ASF/common/services/ioport" -I"../src" -I"../src/ASF/common/services/gpio" -I"../src/ASF/xmega/drivers/cpu" -I"../src/ASF/xmega/drivers/nvm" -I"../src/ASF/common/services/clock" -I"../src/ASF/common/components/display/st7565r" -I"../src/ASF/common/services/gfx_mono" -I"../src/ASF/xmega/drivers/pmic" -I"../src/ASF/xmega/drivers/spi" -I"../src/ASF/common/services/delay" -I"../src/ASF/common/services/spi/xmega_spi" -I"../src/ASF/common/services/spi" -I"../src/ASF/xmega/drivers/usart"  -O1 -fdata-sections -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g3 -Wall -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -c -std=gnu99 -fno-strict-aliasing -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -mrelax -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 src/ASF/xmega/boards/xmega_a3bu_xplained/%.o: ../src/ASF/xmega/boards/xmega_a3bu_xplained/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -DDEBUG -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DBOARD=XMEGA_A3BU_XPLAINED -DIOPORT_XMEGA_COMPAT  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I"../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I"../src/ASF/xmega/utils" -I"../src/config" -I"../src/ASF/common/boards" -I"../src/ASF/xmega/boards" -I"../src/ASF/xmega/boards/xmega_a3bu_xplained" -I"../src/ASF/xmega/utils/preprocessor" -I"../src/ASF/common/utils" -I"../src/ASF/common/services/ioport" -I"../src" -I"../src/ASF/common/services/gpio" -I"../src/ASF/xmega/drivers/cpu" -I"../src/ASF/xmega/drivers/nvm" -I"../src/ASF/common/services/clock"  -O1 -fdata-sections -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g3 -Wall -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -c -std=gnu99 -fno-strict-aliasing -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -mrelax -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -DDEBUG -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DBOARD=XMEGA_A3BU_XPLAINED -DIOPORT_XMEGA_COMPAT -DGFX_MONO_C12832_A1Z=1  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I"../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I"../src/ASF/xmega/utils" -I"../src/config" -I"../src/ASF/common/boards" -I"../src/ASF/xmega/boards" -I"../src/ASF/xmega/boards/xmega_a3bu_xplained" -I"../src/ASF/xmega/utils/preprocessor" -I"../src/ASF/common/utils" -I"../src/ASF/common/services/ioport" -I"../src" -I"../src/ASF/common/services/gpio" -I"../src/ASF/xmega/drivers/cpu" -I"../src/ASF/xmega/drivers/nvm" -I"../src/ASF/common/services/clock" -I"../src/ASF/common/components/display/st7565r" -I"../src/ASF/common/services/gfx_mono" -I"../src/ASF/xmega/drivers/pmic" -I"../src/ASF/xmega/drivers/spi" -I"../src/ASF/common/services/delay" -I"../src/ASF/common/services/spi/xmega_spi" -I"../src/ASF/common/services/spi" -I"../src/ASF/xmega/drivers/usart"  -O1 -fdata-sections -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g3 -Wall -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -c -std=gnu99 -fno-strict-aliasing -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -mrelax -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-src/%.o: ../src/%.c
+src/ASF/xmega/drivers/spi/%.o: ../src/ASF/xmega/drivers/spi/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -DDEBUG -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DBOARD=XMEGA_A3BU_XPLAINED -DIOPORT_XMEGA_COMPAT  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I"../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I"../src/ASF/xmega/utils" -I"../src/config" -I"../src/ASF/common/boards" -I"../src/ASF/xmega/boards" -I"../src/ASF/xmega/boards/xmega_a3bu_xplained" -I"../src/ASF/xmega/utils/preprocessor" -I"../src/ASF/common/utils" -I"../src/ASF/common/services/ioport" -I"../src" -I"../src/ASF/common/services/gpio" -I"../src/ASF/xmega/drivers/cpu" -I"../src/ASF/xmega/drivers/nvm" -I"../src/ASF/common/services/clock"  -O1 -fdata-sections -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g3 -Wall -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -c -std=gnu99 -fno-strict-aliasing -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -mrelax -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -DDEBUG -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DBOARD=XMEGA_A3BU_XPLAINED -DIOPORT_XMEGA_COMPAT -DGFX_MONO_C12832_A1Z=1  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I"../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I"../src/ASF/xmega/utils" -I"../src/config" -I"../src/ASF/common/boards" -I"../src/ASF/xmega/boards" -I"../src/ASF/xmega/boards/xmega_a3bu_xplained" -I"../src/ASF/xmega/utils/preprocessor" -I"../src/ASF/common/utils" -I"../src/ASF/common/services/ioport" -I"../src" -I"../src/ASF/common/services/gpio" -I"../src/ASF/xmega/drivers/cpu" -I"../src/ASF/xmega/drivers/nvm" -I"../src/ASF/common/services/clock" -I"../src/ASF/common/components/display/st7565r" -I"../src/ASF/common/services/gfx_mono" -I"../src/ASF/xmega/drivers/pmic" -I"../src/ASF/xmega/drivers/spi" -I"../src/ASF/common/services/delay" -I"../src/ASF/common/services/spi/xmega_spi" -I"../src/ASF/common/services/spi" -I"../src/ASF/xmega/drivers/usart"  -O1 -fdata-sections -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g3 -Wall -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -c -std=gnu99 -fno-strict-aliasing -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -mrelax -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/ASF/xmega/drivers/usart/%.o: ../src/ASF/xmega/drivers/usart/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.9.2
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -DDEBUG -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DBOARD=XMEGA_A3BU_XPLAINED -DIOPORT_XMEGA_COMPAT -DGFX_MONO_C12832_A1Z=1  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I"../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I"../src/ASF/xmega/utils" -I"../src/config" -I"../src/ASF/common/boards" -I"../src/ASF/xmega/boards" -I"../src/ASF/xmega/boards/xmega_a3bu_xplained" -I"../src/ASF/xmega/utils/preprocessor" -I"../src/ASF/common/utils" -I"../src/ASF/common/services/ioport" -I"../src" -I"../src/ASF/common/services/gpio" -I"../src/ASF/xmega/drivers/cpu" -I"../src/ASF/xmega/drivers/nvm" -I"../src/ASF/common/services/clock" -I"../src/ASF/common/components/display/st7565r" -I"../src/ASF/common/services/gfx_mono" -I"../src/ASF/xmega/drivers/pmic" -I"../src/ASF/xmega/drivers/spi" -I"../src/ASF/common/services/delay" -I"../src/ASF/common/services/spi/xmega_spi" -I"../src/ASF/common/services/spi" -I"../src/ASF/xmega/drivers/usart"  -O1 -fdata-sections -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g3 -Wall -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -c -std=gnu99 -fno-strict-aliasing -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -mrelax -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
@@ -183,14 +344,14 @@ src/%.o: ../src/%.c
 src/ASF/xmega/drivers/nvm/nvm_asm.o: ../src/ASF/xmega/drivers/nvm/nvm_asm.s
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU Assembler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -mrelax -DBOARD=XMEGA_A3BU_XPLAINED -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DIOPORT_XMEGA_COMPAT -I "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I "../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I "../src/ASF/xmega/utils" -I "../src/config" -I "../src/ASF/common/boards" -I "../src/ASF/xmega/boards" -I "../src/ASF/xmega/boards/xmega_a3bu_xplained" -I "../src/ASF/xmega/utils/preprocessor" -I "../src/ASF/common/utils" -I "../src/ASF/common/services/ioport" -I "../src" -I "../src/ASF/common/services/gpio" -I "../src/ASF/xmega/drivers/cpu" -I "../src/ASF/xmega/drivers/nvm" -I "../src/ASF/common/services/clock"  -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -Wa,-g   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -mrelax -DBOARD=XMEGA_A3BU_XPLAINED -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DIOPORT_XMEGA_COMPAT -I "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I "../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I "../src/ASF/xmega/utils" -I "../src/config" -I "../src/ASF/common/boards" -I "../src/ASF/xmega/boards" -I "../src/ASF/xmega/boards/xmega_a3bu_xplained" -I "../src/ASF/xmega/utils/preprocessor" -I "../src/ASF/common/utils" -I "../src/ASF/common/services/ioport" -I "../src" -I "../src/ASF/common/services/gpio" -I "../src/ASF/xmega/drivers/cpu" -I "../src/ASF/xmega/drivers/nvm" -I "../src/ASF/common/services/clock" -I "../src/ASF/common/components/display/st7565r" -I "../src/ASF/common/services/gfx_mono" -I "../src/ASF/xmega/drivers/pmic" -I "../src/ASF/xmega/drivers/spi" -I "../src/ASF/common/services/delay" -I "../src/ASF/common/services/spi/xmega_spi" -I "../src/ASF/common/services/spi" -I "../src/ASF/xmega/drivers/usart"  -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -Wa,-g   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 src/ASF/xmega/drivers/cpu/ccp.o: ../src/ASF/xmega/drivers/cpu/ccp.s
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU Assembler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -mrelax -DBOARD=XMEGA_A3BU_XPLAINED -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DIOPORT_XMEGA_COMPAT -I "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I "../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I "../src/ASF/xmega/utils" -I "../src/config" -I "../src/ASF/common/boards" -I "../src/ASF/xmega/boards" -I "../src/ASF/xmega/boards/xmega_a3bu_xplained" -I "../src/ASF/xmega/utils/preprocessor" -I "../src/ASF/common/utils" -I "../src/ASF/common/services/ioport" -I "../src" -I "../src/ASF/common/services/gpio" -I "../src/ASF/xmega/drivers/cpu" -I "../src/ASF/xmega/drivers/nvm" -I "../src/ASF/common/services/clock"  -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -Wa,-g   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -mrelax -DBOARD=XMEGA_A3BU_XPLAINED -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DIOPORT_XMEGA_COMPAT -I "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I "../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I "../src/ASF/xmega/utils" -I "../src/config" -I "../src/ASF/common/boards" -I "../src/ASF/xmega/boards" -I "../src/ASF/xmega/boards/xmega_a3bu_xplained" -I "../src/ASF/xmega/utils/preprocessor" -I "../src/ASF/common/utils" -I "../src/ASF/common/services/ioport" -I "../src" -I "../src/ASF/common/services/gpio" -I "../src/ASF/xmega/drivers/cpu" -I "../src/ASF/xmega/drivers/nvm" -I "../src/ASF/common/services/clock" -I "../src/ASF/common/components/display/st7565r" -I "../src/ASF/common/services/gfx_mono" -I "../src/ASF/xmega/drivers/pmic" -I "../src/ASF/xmega/drivers/spi" -I "../src/ASF/common/services/delay" -I "../src/ASF/common/services/spi/xmega_spi" -I "../src/ASF/common/services/spi" -I "../src/ASF/xmega/drivers/usart"  -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -Wa,-g   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
@@ -198,14 +359,14 @@ src/ASF/xmega/drivers/cpu/ccp.o: ../src/ASF/xmega/drivers/cpu/ccp.s
 src/ASF/xmega/drivers/nvm/%.o: ../src/ASF/xmega/drivers/nvm/%.s
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU Assembler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -mrelax -DBOARD=XMEGA_A3BU_XPLAINED -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DIOPORT_XMEGA_COMPAT -I "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I "../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I "../src/ASF/xmega/utils" -I "../src/config" -I "../src/ASF/common/boards" -I "../src/ASF/xmega/boards" -I "../src/ASF/xmega/boards/xmega_a3bu_xplained" -I "../src/ASF/xmega/utils/preprocessor" -I "../src/ASF/common/utils" -I "../src/ASF/common/services/ioport" -I "../src" -I "../src/ASF/common/services/gpio" -I "../src/ASF/xmega/drivers/cpu" -I "../src/ASF/xmega/drivers/nvm" -I "../src/ASF/common/services/clock"  -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -Wa,-g   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -mrelax -DBOARD=XMEGA_A3BU_XPLAINED -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DIOPORT_XMEGA_COMPAT -I "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I "../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I "../src/ASF/xmega/utils" -I "../src/config" -I "../src/ASF/common/boards" -I "../src/ASF/xmega/boards" -I "../src/ASF/xmega/boards/xmega_a3bu_xplained" -I "../src/ASF/xmega/utils/preprocessor" -I "../src/ASF/common/utils" -I "../src/ASF/common/services/ioport" -I "../src" -I "../src/ASF/common/services/gpio" -I "../src/ASF/xmega/drivers/cpu" -I "../src/ASF/xmega/drivers/nvm" -I "../src/ASF/common/services/clock" -I "../src/ASF/common/components/display/st7565r" -I "../src/ASF/common/services/gfx_mono" -I "../src/ASF/xmega/drivers/pmic" -I "../src/ASF/xmega/drivers/spi" -I "../src/ASF/common/services/delay" -I "../src/ASF/common/services/spi/xmega_spi" -I "../src/ASF/common/services/spi" -I "../src/ASF/xmega/drivers/usart"  -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -Wa,-g   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 src/ASF/xmega/drivers/cpu/%.o: ../src/ASF/xmega/drivers/cpu/%.s
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU Assembler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -mrelax -DBOARD=XMEGA_A3BU_XPLAINED -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DIOPORT_XMEGA_COMPAT -I "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I "../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I "../src/ASF/xmega/utils" -I "../src/config" -I "../src/ASF/common/boards" -I "../src/ASF/xmega/boards" -I "../src/ASF/xmega/boards/xmega_a3bu_xplained" -I "../src/ASF/xmega/utils/preprocessor" -I "../src/ASF/common/utils" -I "../src/ASF/common/services/ioport" -I "../src" -I "../src/ASF/common/services/gpio" -I "../src/ASF/xmega/drivers/cpu" -I "../src/ASF/xmega/drivers/nvm" -I "../src/ASF/common/services/clock"  -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -Wa,-g   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=atxmega256a3bu -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\gcc\dev\atxmega256a3bu" -mrelax -DBOARD=XMEGA_A3BU_XPLAINED -DCONFIG_NVM_IGNORE_XMEGA_A3_D3_REVB_ERRATA -DIOPORT_XMEGA_COMPAT -I "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.0.38\include" -I "../common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config" -I "../src/ASF/xmega/utils" -I "../src/config" -I "../src/ASF/common/boards" -I "../src/ASF/xmega/boards" -I "../src/ASF/xmega/boards/xmega_a3bu_xplained" -I "../src/ASF/xmega/utils/preprocessor" -I "../src/ASF/common/utils" -I "../src/ASF/common/services/ioport" -I "../src" -I "../src/ASF/common/services/gpio" -I "../src/ASF/xmega/drivers/cpu" -I "../src/ASF/xmega/drivers/nvm" -I "../src/ASF/common/services/clock" -I "../src/ASF/common/components/display/st7565r" -I "../src/ASF/common/services/gfx_mono" -I "../src/ASF/xmega/drivers/pmic" -I "../src/ASF/xmega/drivers/spi" -I "../src/ASF/common/services/delay" -I "../src/ASF/common/services/spi/xmega_spi" -I "../src/ASF/common/services/spi" -I "../src/ASF/xmega/drivers/usart"  -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -Wa,-g   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
