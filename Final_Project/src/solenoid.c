@@ -7,11 +7,12 @@
 void solenoid_init()
 {
 	ioport_init();
-	ioport_set_pin_dir(J1_PIN0, IOPORT_DIR_OUTPUT);
-	ioport_set_pin_dir(J1_PIN1, IOPORT_DIR_OUTPUT);
-	ioport_set_pin_dir(J1_PIN2, IOPORT_DIR_OUTPUT);
-	ioport_set_pin_dir(J1_PIN3, IOPORT_DIR_OUTPUT);
-	ioport_set_pin_dir(J1_PIN4, IOPORT_DIR_OUTPUT);
+	ioport_set_pin_dir(J2_PIN0, IOPORT_DIR_OUTPUT);
+	ioport_set_pin_dir(J2_PIN1, IOPORT_DIR_OUTPUT);
+	ioport_set_pin_dir(J2_PIN2, IOPORT_DIR_OUTPUT);
+	ioport_set_pin_dir(J2_PIN4, IOPORT_DIR_OUTPUT);
+	ioport_set_pin_dir(J2_PIN5, IOPORT_DIR_OUTPUT);
+	ioport_set_pin_dir(J2_PIN6, IOPORT_DIR_OUTPUT);
 }
 
 void solenoid_high_low(port_pin_t pin) 

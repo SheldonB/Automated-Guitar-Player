@@ -63,8 +63,7 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../src/ASF/common/services/gpio/gpio.h \
  ../src/ASF/common/services/gpio/xmega_gpio/xmega_gpio.h \
  ../src/ASF/xmega/drivers/nvm/nvm.h ../src/ASF/xmega/drivers/spi/spi.h \
- ../src/ASF/common/services/spi/xmega_spi/spi_master.h \
- ../src/config/conf_spi_master.h \
+ ../src/ASF/common/services/spi/xmega_usart_spi/usart_spi.h \
  ../src/ASF/xmega/boards/xmega_a3bu_xplained/led.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdarg.h \
@@ -72,7 +71,8 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
  ../src/keyboard.h ../src/solenoid.h ../src/music.h \
- ../src/ASF/xmega/boards/xmega_a3bu_xplained/xmega_a3bu_xplained.h
+ ../src/ASF/xmega/boards/xmega_a3bu_xplained/xmega_a3bu_xplained.h \
+ ../src/jets_util.h
 
 ../src/asf.h:
 
@@ -216,9 +216,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../src/ASF/xmega/drivers/spi/spi.h:
 
-../src/ASF/common/services/spi/xmega_spi/spi_master.h:
-
-../src/config/conf_spi_master.h:
+../src/ASF/common/services/spi/xmega_usart_spi/usart_spi.h:
 
 ../src/ASF/xmega/boards/xmega_a3bu_xplained/led.h:
 
@@ -239,3 +237,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ../src/music.h:
 
 ../src/ASF/xmega/boards/xmega_a3bu_xplained/xmega_a3bu_xplained.h:
+
+../src/jets_util.h:
