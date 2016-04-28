@@ -4,6 +4,7 @@
 #include "music.h"
 #include "solenoid.h"
 
+//Simple Arpegio
 struct SongNote SAMPLE_SONG[] = {
 	{STRING_SIX, 300},
 	{STRING_FIVE, 300},
@@ -13,6 +14,7 @@ struct SongNote SAMPLE_SONG[] = {
 	{STRING_ONE, 300}
 };
 
+//Stairway to Heaven
 struct SongNote STAIRWAY[] = {
 	{STRING_FOUR, 10},
 	{STRING_ONE, 800},
@@ -28,7 +30,10 @@ struct SongNote MISERLOU[] = {
 
 unsigned int SAMPLE_SONG_LENGTH = 6;
 
-
+/*
+Loops through an array of song notes
+and calls the play_note function on each of those notes
+*/
 void play_song(struct SongNote song[], unsigned int length)
 {
 	unsigned int i;
@@ -38,6 +43,11 @@ void play_song(struct SongNote song[], unsigned int length)
 	}	
 }
 
+/*
+Takes a SongNote Struct and then toggels that solenoid
+and then delays a certain time. A SongNote struct has a port to 
+toggle high then low, then a delay till the next not should be played
+*/
 void play_note(struct SongNote note)
 {
 	solenoid_high_low(note.port);

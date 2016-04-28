@@ -9,6 +9,10 @@
 
 #define USART_SERIAL &USARTC0
 
+/*
+Declare the string constants for the menu system
+in program memory.
+*/
 PROGMEM_DECLARE(char const, main_menu_title[]) = "Select a Song";
 PROGMEM_DECLARE(char const, option_one[]) = "Arpeggio";
 PROGMEM_DECLARE(char const, option_two[]) = "Stairway to Heaven";
@@ -33,15 +37,22 @@ void song_menu(uint8_t);
 static void play_sample_song(void);
 static void play_serial(void);
 
-
+/*
+Function to draw the menu of the song that is currently being played
+*/
 void song_menu(uint8_t song_choice)
 {	
-	gfx_mono_draw_filled_rect(0, 0, 128, 32, GFX_PIXEL_CLR);
+	gfx_mono_draw_filled_rect(0, 0, 128, 32, GFX_PIXEL_CLR); //Clear the screen
 	gfx_mono_draw_string("Currently Playing: ", 1, 2, &sysfont);
 	gfx_mono_draw_progmem_string((char PROGMEM_PTR_T)main_menu_strings[song_choice], 1, 10, &sysfont);
 
 }
 
+
+/*
+Wrapper function that will play the song and also accept an input
+from the A3BU keyboard buttons
+*/
 static void play_song_with_input(struct SongNote song[], uint8_t song_length) {
 	struct keyboard_event key;
 	
@@ -58,6 +69,10 @@ static void play_song_with_input(struct SongNote song[], uint8_t song_length) {
 	}
 }
 
+/*
+Start the serial module to play the
+strings via USART serail communication
+*/
 static void play_serial()
 {
 	uint8_t recieved_byte;
@@ -124,6 +139,8 @@ int main (void)
 			menu_status = gfx_mono_menu_process_key(&main_menu, input.keycode);
 		} while (menu_status == GFX_MONO_MENU_EVENT_IDLE);
 
+		//Determine what song to play based on 
+		//the input from the user controlling the A3BU
 		switch(menu_status) {
 			case 0:
 				song_menu(0);
